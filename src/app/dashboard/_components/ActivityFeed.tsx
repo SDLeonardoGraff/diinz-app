@@ -39,7 +39,7 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
       
       {/* 2. RESPONSIVIDADE: Definindo max-h e overflow-y para que o feed seja scrollável
              e não quebre o layout em telas menores ou maiores. */}
-      <ul className="space-y-3 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
+      <ul className="space-y-3 max-h-100 sm:max-h-125 overflow-y-auto pr-2">
         {activities.map((activity) => {
           const Icon = CategoryIconMap[activity.categoria];
           const color = CategoryColorMap[activity.categoria];
@@ -50,16 +50,16 @@ export const ActivityFeed: React.FC<ActivityFeedProps> = ({ activities }) => {
               className="flex items-start gap-3 p-3 hover:bg-gray-700/70 rounded-lg transition-colors cursor-pointer"
             >
               {/* 3. CORES MELHORADAS: Usando o CategoryColorMap */}
-              <div className={`p-2 rounded-full ${color.bg} ${color.text} flex-shrink-0`}>
+              <div className={`p-2 rounded-full ${color.bg} ${color.text} shrink-0`}>
                 <Icon size={18} />
               </div>
               
               <div className="flex-1 min-w-0">
                 {/* min-w-0 evita que o texto longo force a quebra do layout */}
-                <p className="text-sm font-medium text-white break-words">{activity.descricao}</p>
+                <p className="text-sm font-medium text-white wrap-words">{activity.descricao}</p>
                 
                 <div className="flex items-center text-xs text-gray-400 mt-1">
-                  <Clock size={12} className="mr-1 flex-shrink-0" />
+                  <Clock size={12} className="mr-1 shrink-0" />
                   {/* Adicionando data com opacidade para contraste suave */}
                   <span className="opacity-80">{activity.data}</span> 
                 </div>

@@ -77,7 +77,7 @@ export default function Dashboard() {
             <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
                 
                 {/* GRÁFICO (Ocupa 2/3 da largura em LG+) */}
-                <div className="lg:col-span-2 bg-gray-800 p-4 sm:p-6 rounded-xl shadow-xl min-h-[300px]">
+                <div className="lg:col-span-2 bg-gray-800 p-4 sm:p-6 rounded-xl shadow-xl min-h-75">
                     <h2 className="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2">Faturamento Mensal</h2>
                     
                     {/* 2. AJUSTE: Otimizando o container do Chart. A altura é essencial para o ResponsiveContainer */}

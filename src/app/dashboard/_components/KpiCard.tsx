@@ -109,13 +109,13 @@ export const KpiCard: React.FC<KpiCardProps> = ({ data }) => {
       
       <div className="flex items-end justify-between mt-1">
         {/* 3. AJUSTE: min-w-0 e flex-shrink para que o valor e a tendência se ajustem bem */}
-        <span className="text-2xl sm:text-3xl font-bold text-white flex-shrink min-w-0">
+        <span className="text-2xl sm:text-3xl font-bold text-white shrink min-w-0">
           {formatValue(valor, unidade)}
         </span>
         
         {tendencia !== undefined && (
           // flex-shrink-0 para garantir que a tendência seja sempre visível
-          <div className={`flex items-center text-sm font-semibold flex-shrink-0 ml-3 ${trendColor}`}>
+          <div className={`flex items-center text-sm font-semibold shrink-0 ml-3 ${trendColor}`}>
             <TrendIcon size={16} className="mr-1" />
             {Math.abs(tendencia).toFixed(1)}%
           </div>
