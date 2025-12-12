@@ -14,9 +14,9 @@ export const sidebarItems = [
         href: "/vendas",
         // Links aninhados
         children: [
-            { name: "Pedidos", href: "/vendas/pedidos" },
-            { name: "Histórico", href: "/vendas/historico" },
-            { name: "Relatórios", href: "/vendas/relatorios" },
+            { name: "Pedidos", href: "/pedidos" },
+            { name: "Histórico", href: "/historico" },
+            { name: "Relatórios", href: "/relatorios" },
         ]
     },
     {
