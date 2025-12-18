@@ -7,6 +7,15 @@ import { ArrowUp10, CirclePlus, FunnelX, Search } from "lucide-react";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import TabelaVendas from "./_components/TabelaPedidos";
+import Paginacao from "./_components/Paginacao";
+
+interface ResponseDataVenda {
+    vendas: any[];
+    meta: {
+        totalPedidos: number;
+        totalPaginas: number;
+    }
+}
 
 export default function Pedidos() {
     const [clienteFiltro, setClienteFiltro] = useState<string>("");
@@ -15,8 +24,10 @@ export default function Pedidos() {
     const [pedidos, setPedidos] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [page, setPage] = useState(1);
-    const [limit] = useState(10);
+    const [page, setPage] = useState<number>(1);
+    const [limit] = useState<number>(8);
+    const [totalPaginas, setTotalPaginas] = useState<number>(1);
+    const [totalVendas, setTotalVendas] = useState<number>(0);
 
     const params = useMemo(() => {
         const filtrosTratados: Record<string, string> = {};
@@ -57,10 +68,12 @@ export default function Pedidos() {
                 throw new Error(`Erro ao carregar pedidos: ${response.statusText}`);
             }
 
-            const data: any[] = await response.json();
-            setPedidos(data);
+            const {vendas, meta}: ResponseDataVenda = await response.json();
+            setPedidos(vendas);
+            setTotalPaginas(meta.totalPaginas);
+            setTotalVendas(meta.totalPedidos);
 
-            console.log("pedidos", data);
+            console.log("pedidos", vendas);
             
         } catch (err) {
             setError(err instanceof Error ? err.message : "Erro desconhecido ao carregar dados.");
@@ -119,7 +132,7 @@ export default function Pedidos() {
                             />
                             <Input 
                                 id="codigo"
-                                type="number"
+                                type="text"
                                 placeholder="Ex:. 12"
                                 value={codigoFiltro ? codigoFiltro : ""}
                                 onChange={(e) => {
@@ -184,6 +197,13 @@ export default function Pedidos() {
                 <div className="pt-4">
                     <TabelaVendas isLoading={isLoading} vendas={pedidos}/>
                 </div>
+
+                <Paginacao
+                    page={page}
+                    setPage={setPage}
+                    totalPaginas={totalPaginas}
+                    totalVendas={totalVendas}
+                />
             </main>
         </div>
     )

@@ -92,18 +92,28 @@ export async function GET(request: NextRequest) {
         
         const skip = (page - 1) * limit;
 
-        console.log("filtro", mongoFilter);
-
+        const vendaCollection = db.collection('DtoVenda');
         // 5. BUSCAR OS DADOS (PRODUTOS, PEDIDOS, etc.)
-        const pedidos = await db.collection('DtoVenda')
+        const pedidos = await vendaCollection
                                 .find(mongoFilter) // Aqui você adicionaria filtros da requisição (query params)
                                 .sort({Codigo: -1} as Sort)
                                 .skip(skip)
                                 .limit(limit)
                                 .toArray();
 
+        const totalPedidos = await vendaCollection.countDocuments(mongoFilter)                               
+        const totalPaginas = Math.ceil(totalPedidos / limit);
+
+        const responseData = {
+            vendas: pedidos,
+            meta: {
+                totalPedidos: totalPedidos,
+                totalPaginas: totalPaginas,
+            }
+        }
+
         // 6. RETORNAR OS DADOS AO CLIENTE
-        return NextResponse.json(pedidos, { status: 200 });
+        return NextResponse.json(responseData, { status: 200 });
 
     } catch (error) {
         console.error("Erro ao buscar pedidos no MongoDB:", error);

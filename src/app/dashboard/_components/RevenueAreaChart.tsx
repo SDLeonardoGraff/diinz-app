@@ -75,7 +75,11 @@ export const RevenueBarChart: React.FC<RevenueAreaChartProps> = ({ data }) => {
           {/* Tooltip interativo do shadcn (mantido) */}
           <ChartTooltip 
               cursor={false} 
-              content={<ChartTooltipContent formatter={(value) => formatCurrency(value as number)} />} 
+              content={
+                <ChartTooltipContent 
+                  className="bg-zinc-900/95 border border-zinc-700 text-white shadow-lg"
+                  formatter={(value) => formatCurrency(value as number)} />
+              } 
           />
           
           <Bar

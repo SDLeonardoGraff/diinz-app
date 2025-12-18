@@ -1,0 +1,17 @@
+version: '3.9'
+
+services:
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin-container
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com   # login da interface web
+      PGADMIN_DEFAULT_PASSWORD: root           # senha da interface web
+    ports:
+      - "8080:80"                              # acesso via navegador
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+
+volumes:
+  pgadmin_data:

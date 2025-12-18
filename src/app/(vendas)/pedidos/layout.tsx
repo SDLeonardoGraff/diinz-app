@@ -47,14 +47,12 @@ export default function PedidosLayout({children}: {children: ReactNode}) {
                 className={`
                     flex-1 grow w-full relative
                     transition-all duration-300 
-                    pt-6 sm:pt-8 md:pt-10 
+                    pt-6 sm:pt-8 md:pt-10
                     px-4 sm:px-6 md:px-10 
                     overflow-y-auto
                     ${isSidebarOpen ? FULL_WIDTH : COLLAPSED_WIDTH}
                 `}
             >
-                
-                
                 {children}
             </main>
 
